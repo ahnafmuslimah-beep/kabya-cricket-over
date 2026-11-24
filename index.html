@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kabya Cricket Over</title>
+<style>
+body{font-family:sans-serif;background:#0f5132;color:white;text-align:center;padding:20px}
+.box{background:white;color:#222;border-radius:20px;padding:20px;max-width:400px;margin:auto}
+h1{color:#0f5132}
+#over{font-size:50px;margin:10px}
+button{font-size:20px;padding:12px 18px;margin:5px;border:none;border-radius:12px;cursor:pointer}
+.run{background:#ffc107}
+.wicket{background:#dc3545;color:white}
+.dot{background:#eee}
+.reset{background:#333;color:white;width:100%}
+</style>
+</head>
+<body>
+<h1>🏏 Kabya Cricket Over</h1>
+<div class="box">
+<h2 id="score">Run: 0 | Wicket: 0</h2>
+<div id="over">- - - - - -</div>
+<p id="msg">Over suru koro!</p>
+<button class="dot" onclick="ball(0)">0 Dot</button>
+<button class="run" onclick="ball(1)">1 Run</button>
+<button class="run" onclick="ball(2)">2 Run</button>
+<button class="run" onclick="ball(4)">4 Four</button>
+<button class="run" onclick="ball(6)">6 Six</button><br>
+<button class="wicket" onclick="ball('W')">Wicket!</button><br>
+<button class="reset" onclick="resetGame()">Abar Suru Koro</button>
+</div>
+<script>
+let balls=[], runs=0, wickets=0;
+function ball(v){
+if(balls.length>=6) return;
+balls.push(v);
+if(v==='W') wickets++; else runs+=v;
+let show=[];
+for(let i=0;i<6;i++){ show.push(balls[i]!==undefined?balls[i]:'-'); }
+document.getElementById('over').innerText=show.join(' ');
+document.getElementById('score').innerText=`Run: ${runs} | Wicket: ${wickets}`;
+if(balls.length===6){
+document.getElementById('msg').innerText=`Over Ses! Total ${runs} Run, ${wickets} Wicket. Kabya Jiteche! 🎉`;
+} else {
+document.getElementById('msg').innerText=`${balls.length} ball hoyeche, ar ${6-balls.length} ta baki`;
+}
+}
+function resetGame(){ balls=[]; runs=0; wickets=0; document.getElementById('over').innerText='- - - - - -'; document.getElementById('score').innerText='Run: 0 | Wicket: 0'; document.getElementById('msg').innerText='Over suru koro!'; }
+</script>
+</body>
+  </html>
